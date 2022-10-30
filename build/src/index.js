@@ -9,8 +9,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const connection_1 = require("./connection");
-(() => __awaiter(void 0, void 0, void 0, function* () {
-    const client = new connection_1.RedisClient();
-    const connection = yield client.connect();
-}))();
+const module_1 = require("./module");
+function start() {
+    return __awaiter(this, void 0, void 0, function* () {
+        const client = new module_1.Client();
+        yield client.init();
+        console.log("connected");
+        yield new module_1.Set().withName("NodeRedis3").save("654321");
+        console.log("set saved");
+    });
+}
+start();

@@ -9,16 +9,20 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.RedisClient = exports.connection = void 0;
-const redis_1 = require("redis");
-class RedisClient {
-    init() {
+exports.RedisSet = void 0;
+const connection_1 = require("./connection");
+class RedisSet {
+    constructor() {
+        this._setName = "";
+    }
+    withName(name) {
+        this._setName = name;
+        return this;
+    }
+    save(value) {
         return __awaiter(this, void 0, void 0, function* () {
-            const client = (0, redis_1.createClient)();
-            client.on('error', (err) => console.log('Redis Client Error', err));
-            yield client.connect();
-            exports.connection = client;
+            yield connection_1.connection.set(this._setName, value);
         });
     }
 }
-exports.RedisClient = RedisClient;
+exports.RedisSet = RedisSet;

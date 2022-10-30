@@ -1,15 +1,16 @@
-import { RedisClient } from './connection';
-import { RedisSet } from './set';
+import { Client, Set } from './module';
 
 
+async function start() {
 
-(async () => {
+    const client = new Client();
+    await client.init();
 
-const client = new RedisClient();
-const connection = await client.connect();
+    console.log("connected");
+    await new Set().withName("NodeRedis3").save("654321");
 
-await new RedisSet().withConnection(connection).withName("NodeRedis").save("654321");
+    console.log("set saved");
+}
 
-console.log("connected");
+start();
 
-})();
