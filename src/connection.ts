@@ -1,9 +1,9 @@
 import { createClient } from 'redis';
 
-export var connection: any;
+export var connection: any = {};
 
 export class RedisClient {
-    
+
     async init () {
 
         const client = createClient();

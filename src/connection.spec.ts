@@ -1,6 +1,6 @@
 import { RedisClient } from './connection';
 
-const connectfn = jest.fn().mockImplementation(() => {});
+const connectfn = jest.fn().mockImplementation();
 const onfn = jest.fn().mockImplementation((event, fn) => {});
 
 jest.mock('redis', () => {

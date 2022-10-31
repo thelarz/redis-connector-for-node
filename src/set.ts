@@ -2,15 +2,20 @@ import { connection } from './connection';
 
 export class RedisSet {
 
-    _setName: string = "";
+    private _name: string = "";
+
+    get name(): string {
+        return this._name;
+    }
 
     withName(name: string) {
-        this._setName = name;
+        this._name = name;
         return this;
     }
 
     async save(value: any) {
-        await connection.set(this._setName, value)
+        await connection.set(this._name, value)
+        return this;
     }
 
 }
